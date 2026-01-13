@@ -1,66 +1,345 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Videsparv Executive Risk</title>
+  <meta name="description" content="Independent executive-level briefings on risk, crisis decision-making, and organizational exposure." />
   <style>
-    body {
-      font-family: Georgia, "Times New Roman", serif;
-      background-color: #ffffff;
-      color: #111111;
-      max-width: 720px;
-      margin: 80px auto;
-      padding: 0 20px;
-      line-height: 1.6;
+    :root{
+      --bg:#0b1220;
+      --panel:#0f1a2e;
+      --card:#0f1a2e;
+      --text:#e8eefc;
+      --muted:#b9c6e6;
+      --subtle:#7f92c5;
+      --line:rgba(255,255,255,0.10);
+      --accent:#7aa2ff;
+      --accent2:#55d6c2;
+      --shadow: 0 18px 50px rgba(0,0,0,0.45);
     }
-    h1 {
-      font-size: 28px;
-      margin-bottom: 10px;
+
+    *{box-sizing:border-box;}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      background:
+        radial-gradient(1200px 600px at 20% 10%, rgba(122,162,255,0.25), transparent 55%),
+        radial-gradient(900px 500px at 80% 20%, rgba(85,214,194,0.18), transparent 55%),
+        linear-gradient(180deg, var(--bg), #060a14 70%);
+      color:var(--text);
+      line-height:1.55;
     }
-    h2 {
-      font-size: 18px;
-      margin-top: 40px;
+
+    a{color:var(--text); text-decoration:none;}
+    a:hover{opacity:0.9;}
+
+    .wrap{
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 28px 18px 80px;
     }
-    p {
+
+    /* Top bar */
+    .topbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      padding: 14px 10px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.03);
+      border-radius: 14px;
+      backdrop-filter: blur(8px);
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      min-width:0;
+    }
+    .mark{
+      width:12px;
+      height:12px;
+      border-radius: 3px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      box-shadow: 0 0 0 4px rgba(122,162,255,0.12);
+    }
+    .brandname{
+      font-weight:600;
+      letter-spacing:0.2px;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    .nav{
+      display:flex;
+      gap:14px;
+      align-items:center;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+      font-size: 14px;
+      color: var(--muted);
+    }
+    .nav a{color:var(--muted);}
+    .nav a:hover{color:var(--text);}
+
+    /* Hero */
+    .hero{
+      margin-top: 26px;
+      display:grid;
+      grid-template-columns: 1.3fr 0.7fr;
+      gap: 18px;
+      align-items:stretch;
+    }
+    @media (max-width: 860px){
+      .hero{grid-template-columns:1fr;}
+    }
+
+    .heroCard{
+      border:1px solid var(--line);
+      background: rgba(255,255,255,0.04);
+      border-radius: 18px;
+      padding: 28px;
+      box-shadow: var(--shadow);
+    }
+
+    .kicker{
+      font-size: 13px;
+      color: var(--subtle);
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      margin-bottom: 12px;
+    }
+    h1{
+      font-size: 34px;
+      line-height:1.15;
+      margin: 0 0 14px;
+      font-weight: 650;
+      letter-spacing: -0.02em;
+    }
+    .lead{
       font-size: 16px;
+      color: var(--muted);
+      margin: 0 0 18px;
+      max-width: 64ch;
     }
-    .subtle {
-      color: #555555;
+
+    .ctaRow{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top: 16px;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      padding: 11px 14px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.04);
+      color: var(--text);
+      font-weight: 600;
+      font-size: 14px;
+      cursor:pointer;
+      transition: transform 0.08s ease, background 0.2s ease;
+    }
+    .btn:hover{background: rgba(255,255,255,0.07);}
+    .btn:active{transform: translateY(1px);}
+    .btnPrimary{
+      border: 1px solid rgba(122,162,255,0.35);
+      background: linear-gradient(135deg, rgba(122,162,255,0.25), rgba(85,214,194,0.14));
+    }
+
+    .meta{
+      margin-top: 18px;
+      display:flex;
+      gap:18px;
+      flex-wrap:wrap;
+      color: var(--subtle);
+      font-size: 13px;
+    }
+
+    /* Side card */
+    .sideCard{
+      border:1px solid var(--line);
+      background: rgba(255,255,255,0.03);
+      border-radius: 18px;
+      padding: 22px;
+    }
+    .sideTitle{
+      font-weight: 650;
+      margin: 0 0 10px;
+      font-size: 14px;
+      color: var(--text);
+    }
+    .bullets{
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .bullets li{margin: 8px 0;}
+
+    /* Sections */
+    .grid{
+      margin-top: 18px;
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+    @media (max-width: 860px){
+      .grid{grid-template-columns:1fr;}
+    }
+
+    .card{
+      border:1px solid var(--line);
+      background: rgba(255,255,255,0.03);
+      border-radius: 18px;
+      padding: 22px;
+    }
+    .card h2{
+      margin: 0 0 10px;
+      font-size: 16px;
+      font-weight: 650;
+    }
+    .card p{
+      margin: 0 0 10px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .tagRow{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top: 10px;
+    }
+    .tag{
+      font-size: 12px;
+      color: var(--muted);
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.02);
+      padding: 6px 10px;
+      border-radius: 999px;
+    }
+
+    .divider{
+      margin: 26px 0 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .footer{
+      margin-top: 20px;
+      color: var(--subtle);
+      font-size: 12px;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+
+    .smallLinks{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+    }
+    .smallLinks a{
+      color: var(--subtle);
+      border-bottom: 1px solid rgba(255,255,255,0.12);
+      padding-bottom: 2px;
+    }
+    .smallLinks a:hover{color: var(--text);}
+
+    .note{
+      color: var(--subtle);
+      font-size: 12px;
     }
   </style>
 </head>
+
 <body>
+  <div class="wrap">
 
-<h1>Videsparv Executive Risk</h1>
-<p class="subtle">
-Independent perspectives on executive risk, crisis decision-making, and organizational exposure.
-</p>
+    <div class="topbar">
+      <div class="brand">
+        <div class="mark"></div>
+        <div class="brandname">Videsparv Executive Risk</div>
+      </div>
+      <div class="nav">
+        <a href="#briefing">Briefing</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
 
-<h2>The Executive Risk Briefing</h2>
-<p>
-A private monthly briefing for senior leaders and boards on how risk is commonly misjudged — and what actually matters in high-stakes environments.
-</p>
+    <div class="hero">
+      <div class="heroCard">
+        <div class="kicker">Independent executive-level briefings</div>
+        <h1>Executive Risk. Clearer decisions under uncertainty.</h1>
+        <p class="lead">
+          Videsparv Executive Risk publishes a private monthly briefing for senior leaders and boards on how risk is commonly misjudged — and what actually matters in high-stakes environments.
+        </p>
 
-<h2>What this is not</h2>
-<p>
-Not consulting. Not operational security advice. Not affiliated with, endorsed by, or representing any employer or organization.
-</p>
+        <div class="ctaRow" id="contact">
+          <a class="btn btnPrimary" href="mailto:christian.videsparv@gmail.com?subject=Executive%20Risk%20Briefing%20%E2%80%93%20sample%20request&body=Hi%20Christian%2C%0A%0AI%E2%80%99d%20like%20to%20request%20a%20sample%20issue%20of%20the%20Executive%20Risk%20Briefing.%0A%0AName%3A%0ARole%3A%0AOrganization%3A%0A%0AThanks%2C">
+            Request a sample
+          </a>
+          <a class="btn" href="mailto:christian.videsparv@gmail.com?subject=Executive%20Risk%20Briefing%20%E2%80%93%20access%20inquiry&body=Hi%20Christian%2C%0A%0AI%E2%80%99d%20like%20to%20learn%20more%20about%20access%20to%20the%20Executive%20Risk%20Briefing.%0A%0AName%3A%0ARole%3A%0AOrganization%3A%0A%0AThanks%2C">
+            Inquire about access
+          </a>
+        </div>
 
-<h2>Who it’s for</h2>
-<p>
-Executives, board members, and senior leaders seeking independent perspective on risk and decision-making.
-</p>
+        <div class="meta">
+          <div>Monthly cadence</div>
+          <div>Board-level framing</div>
+          <div>Non-operational</div>
+        </div>
+      </div>
 
-<h2>About</h2>
-<p>
-Written by an independent security professional with experience across public-sector protection, corporate security leadership, and multi-site advisory work in complex environments.
-</p>
+      <div class="sideCard">
+        <div class="sideTitle">What you can expect</div>
+        <ul class="bullets">
+          <li>Short, decision-focused analysis (not tactics).</li>
+          <li>Clear trade-offs, incentives, and failure modes.</li>
+          <li>Practical implications for leadership and governance.</li>
+        </ul>
 
-<h2>Contact</h2>
-<p>
-Email: <a href="mailto:christian.videsparv@gmail.com">christian.videsparv@gmail.com</a>
-</p>
+        <div class="divider"></div>
 
-</body>
-</html>
+        <div class="sideTitle" style="margin-top:16px;">Common themes</div>
+        <div class="tagRow">
+          <div class="tag">Crisis decision-making</div>
+          <div class="tag">Executive exposure</div>
+          <div class="tag">Converged risk</div>
+          <div class="tag">Operational resilience</div>
+          <div class="tag">Governance</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid" id="briefing">
+      <div class="card">
+        <h2>The Executive Risk Briefing</h2>
+        <p>
+          A private monthly briefing designed for leaders who need independent perspective on risk, exposure, and crisis decision-making — without noise, hype, or vendor agendas.
+        </p>
+        <p>
+          Each issue is concise, readable, and structured to support decision-making at executive and board level.
+        </p>
+      </div>
+
+      <div class="card">
+        <h2>What this is (and is not)</h2>
+        <p><strong>This is:</strong> independent analysis and decision framing for executives and boards.</p>
+        <p><strong>This is not:</strong> consulting, operational security advice, incident response support, or a service tied to any employer or organization.</p>
+        <p class="note">
+          Content is provided for general informational purposes and reflects independent views.
+        </p>
+      </div>
+    </div>
+
+    <div class="grid" id="about">
+      <div class="card">
